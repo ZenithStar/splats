@@ -75,6 +75,7 @@ public class trzyderuszanie : MonoBehaviour
 
         // inverse squared velocity "air resistance" sim
         var inverseHorizontalVelocity = -(rigidBody.velocity.sqrMagnitude * rigidBody.velocity.normalized); //TODO: instead of normalized, it should be sign, but cbf to write that out for now
+        inverseHorizontalVelocity.y = 0.0f; // don't simulate this in the //jump/gravity direction
         rigidBody.AddForce(dragFactor * inverseHorizontalVelocity * Time.fixedDeltaTime);
     }
 }
