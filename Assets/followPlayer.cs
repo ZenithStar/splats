@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class followPlayer : MonoBehaviour
 {
-    private Transform target;
-    public float speed;
+    public Transform target;
+    public float speed = 4f;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();    
-            }
+       rb = GetComponent<Rigidbody>();  
+
+    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed*Time.deltaTime);
-    }
+        Vector3 pos = Vector3.MoveTowards(transform.position, target.position, speed * Time.fixedDeltaTime);
+        rb.MovePosition(pos);
+        transform.LookAt(target);
+    }   
 }
